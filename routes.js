@@ -6,7 +6,7 @@ const devController = require('./Controllers/devControlller')
 
 routes.get('/', (req, res) => {
     res.render('index', {
-        pageTitle: 'Home'
+        pageTitle: 'Laborshare - Provendo reforço de qualidade para altas demandas temporárias de desenvolvimento de software'
     })
 })
 

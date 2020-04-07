@@ -11,7 +11,9 @@ const sendGridKey = 'SG.QDL0wF4FREy0UQm_yXJnmQ.0V0i9DlFvgiUtBEYzZ9F6tsDPsEAw4L2P
 module.exports = {
 
     async index(req, res) {
-        res.render('company')
+        res.render('company', {
+            pageTitle: 'Laborshare - RH'
+        })
     },
     
     async store(req, res) {
