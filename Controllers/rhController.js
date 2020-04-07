@@ -24,22 +24,38 @@ module.exports = {
             const info = await promisify(doc.getInfo)()
             const worksheet = info.worksheets[worksheetCompany]
             await promisify(worksheet.addRow)({
-                name: req.body.name, 
+                Name: req.body.name, 
                 email: req.body.email,
                 position: req.body.position,
                 hired: req.body.freelancer,
                 company: req.body.company,
+                hardSkills: req.body.hardSkills,
+                softSkills: req.body.softSkills,
+                Matching: req.body.matching,
+                Resume: req.body.resume,
+                Validation: req.body.validation,
+                HourBased: req.body.hour,
+                ProjectBased: req.body.project,
+                Contract: req.body.contract,
+                Deliverable: req.body.deliverable,
+                RealTime: req.body.realTime,
+                ProjectManagement: req.body.projectManagement,
+                Assessment: req.body.assessment,
+                Comments: req.body.comment
             })
             sgMail.setApiKey(sendGridKey);
             const msg = {
-            to: 'brenorvale@gmail.com',
+            to: req.body.email,
             from: 'laborshare@gmail.com',
-            subject: 'Sending with Twilio SendGrid is Fun',
+            subject: 'Plataforma LaborShare',
             text: 'Teste',
-            html: '<strong>Teste</strong>',
+            html: '<strong>Obrigado por responder nossa pesquisa</strong>',
+            html: '<p>Todas as informações compartilhadas serão usadas apenas para nossa pesquisa de campo, logo após serão apagadas de nosso banco de dados.</p>'
             }   
             await sgMail.send(msg);
-        res.render('acknowledge')
+        res.render('acknowledge', {
+            pageTitle: 'LaborShare - Obrigado'
+        })
         } catch (err) {
             res.send('Erro ao Enviar o formulário.')
             console.log(err)

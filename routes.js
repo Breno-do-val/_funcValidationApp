@@ -11,7 +11,9 @@ routes.get('/', (req, res) => {
 })
 
 routes.get('/acknowledge', (req, res) => {
-    res.render('acknowledge')
+    res.render('acknowledge', {
+        pageTitle: 'LaborShare - Formulário Enviado'
+    })
 })
 
 routes.get('/company', rhController.index)
