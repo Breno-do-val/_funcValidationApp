@@ -10,7 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "@sendgrid/mail": "^6.4.0",
-    "bootstrap": "^4.4.1",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "google-spreadsheet": "^2.0.8"

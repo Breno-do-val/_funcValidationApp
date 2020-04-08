@@ -44,7 +44,7 @@ module.exports = {
             })
             sgMail.setApiKey(sendGridKey);
             const msg = {
-            to: req.body.email,
+            to: 'brenorvale@gmail.com',
             from: 'laborshare@gmail.com',
             subject: 'Plataforma LaborShare',
             text: 'Teste',
