@@ -11,30 +11,47 @@ const sendGridKey = 'SG.QDL0wF4FREy0UQm_yXJnmQ.0V0i9DlFvgiUtBEYzZ9F6tsDPsEAw4L2P
 module.exports = {
     
     async index(req, res) {
-        res.render('developer')
+        res.render('developer', {
+            pageTitle: 'LaborShare - DEV'
+        })
     },
 
     async store(req, res) {
         try {
             const doc = new googleSpreadsheet(docId)
             await promisify(doc.useServiceAccountAuth)(credentials)
-            console.log('Planilha aberta')
             const info = await promisify(doc.getInfo)()
             const worksheet = info.worksheets[worksheetDeveloper]
             await promisify(worksheet.addRow)({
-                name: req.body.name, 
-                position: req.body.position
+                name: req.body.name,
+                email: req.body.email,
+                position: req.body.position,
+                hired: req.body.freelancer,
+                company: req.body.company,
+                matching: req.body.matching,
+                cultureAlignment: req.body.alignment,
+                hardSkills: req.body.hardSkills,
+                hourBased: req.body.hourBased,
+                Contract: req.body.contract,
+                taxDeclaration: req.body.tax,
+                ProjectManagement: req.body.projectManagement,
+                HourControl: req.body.hourControl,
+                Assessment: req.body.assessment,
+                Comments: req.body.comment,
             })
             sgMail.setApiKey(sendGridKey);
             const msg = {
-            to: 'brenorvale@gmail.com',
-            from: 'laborshare@gmail.com',
-            subject: 'Sending with Twilio SendGrid is Fun',
-            text: 'Teste',
-            html: '<strong>Teste</strong>',
+                to: req.body.email,
+                from: 'laborshare@gmail.com',
+                subject: 'Plataforma LaborShare',
+                text: 'Teste',
+                html: '<strong>Obrigado por responder nossa pesquisa</strong>',
+                html: '<p>Todas as informações compartilhadas serão usadas apenas para nossa pesquisa de campo, logo após serão apagadas de nosso banco de dados.</p>'
             };
             await sgMail.send(msg);
-            res.render('acknowledge')
+            res.render('acknowledge', {
+                pageTitle: 'LaborShare - Obrigado'
+            })
         } catch (err) {
         res.send('Erro ao Enviar o formulário.')
         console.log(err)

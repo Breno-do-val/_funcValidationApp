@@ -20,7 +20,6 @@ module.exports = {
         try {
             const doc = new googleSpreadsheet(docId)
             await promisify(doc.useServiceAccountAuth)(credentials)
-            console.log('Planilha aberta')
             const info = await promisify(doc.getInfo)()
             const worksheet = info.worksheets[worksheetCompany]
             await promisify(worksheet.addRow)({
@@ -41,7 +40,7 @@ module.exports = {
                 RealTime: req.body.realTime,
                 ProjectManagement: req.body.projectManagement,
                 Assessment: req.body.assessment,
-                Comments: req.body.comment
+                Comments: req.body.comment,
             })
             sgMail.setApiKey(sendGridKey);
             const msg = {
